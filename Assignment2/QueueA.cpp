@@ -59,5 +59,10 @@ QueueItemType Queue::getFront() const throw (QueueException)
 	return items[front];
 } // end getFront
 
+bool Queue::operator<(const Queue &q)
+{
+	return count < q.count;
+}
+
 // End of implementation file.
 

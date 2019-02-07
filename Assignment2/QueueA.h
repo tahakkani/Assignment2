@@ -30,7 +30,12 @@ public:
    virtual void enqueue(QueueItemType& newItem) throw (QueueException);
    void dequeue() throw (QueueException);
    QueueItemType getFront() const throw (QueueException);
-
+   
+	 int getCount() const {return count;};
+	 bool operator<(const Queue&);
+	 
+	 friend void display(const Queue &);
+	 friend void operator<<(ostream&, const Queue&);
 protected:
    QueueItemType items[MAX_QUEUE];
    int           front;

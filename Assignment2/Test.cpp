@@ -1,10 +1,11 @@
 #include "QueueA.cpp"
 #include "PQueue.cpp"
-#include "QueueException.h"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
 using namespace std;
+
+bool operator>(const Queue&, const Queue&);
 
 int main()
 {
@@ -57,4 +58,40 @@ int main()
   	iter ++;
   	qptr = &pQ;
 	}while(iter < 2);
+	
+	//testing to see if the queues are greater than or less than each other
+	
+	Queue q1, q2;
+	QueueItemType a = 6;
+	q1.enqueue(a);
+	q2.enqueue(a);
+	q2.enqueue(a);
+	
+	if(q1 < q2)
+		cout << "q1 has fewer items than q2.\n";
+	else if (q1 > q2)
+		cout << "q1 has more items than q2.\n";
+	else
+		cout << "They have an equal amount of items\n";
+		
+	display(q1);
+	display(q2);
+	cout << endl << q1;
+  cout << q2;
+}
+
+bool operator>(const Queue& q, const Queue& r)
+{
+	return q.getCount() > r.getCount();
+}
+
+void operator<<(ostream &os, const Queue& q)
+{
+	for(int i = 0; i < q.count; i++)
+		os << q.items[(q.front + i) % MAX_QUEUE] << endl;
+}
+void display(const Queue &q)
+{
+	for(int i = 0; i < q.count; i++)
+		cout << q.items[(q.front + i) % MAX_QUEUE] << endl;
 }
